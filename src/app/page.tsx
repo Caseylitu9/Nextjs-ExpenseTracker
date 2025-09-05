@@ -6,7 +6,7 @@ import { CategoryPieChart } from "@/components/charts/category-pie-chart";
 
 export default function DashboardPage() {
   return (
-    <div className="flex-1 space-y-4">
+    <div className="flex-1 space-y-4 p-4">
       <div className="space-y-2">
         <h1 className="text-3xl font-headline font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">Here's a snapshot of your financial health.</p>
@@ -20,7 +20,7 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">KSH 550,145.70</div>
+            <div className="text-2xl font-bold text-green-600">KSH 550,145.70</div>
             <p className="text-xs text-muted-foreground">
               +20.1% from last month
             </p>
@@ -34,7 +34,7 @@ export default function DashboardPage() {
             <Receipt className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">KSH 246,285.00</div>
+            <div className="text-2xl font-bold text-red-600">KSH 246,285.00</div>
             <p className="text-xs text-muted-foreground">
               +12.4% from last month
             </p>
