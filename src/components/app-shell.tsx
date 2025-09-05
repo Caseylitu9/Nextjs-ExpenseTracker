@@ -15,44 +15,58 @@ const pageTitles: { [key: string]: string } = {
   '/taxes': 'Tax Estimator',
 };
 
+const unprotectedRoutes = ['/login', '/signup'];
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();
   const pathname = usePathname();
   const router = useRouter();
   const [title, setTitle] = useState('Dashboard');
-  const [isClient, setIsClient] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    // This check runs only on the client-side
+    const authStatus = localStorage.getItem('isAuthenticated') === 'true';
+    setIsAuthenticated(authStatus);
 
-  useEffect(() => {
-    if (isClient && !localStorage.getItem('isAuthenticated')) {
+    if (!authStatus && !unprotectedRoutes.includes(pathname)) {
       router.push('/login');
     }
-  }, [isClient, router]);
+  }, [pathname, router]);
 
   useEffect(() => {
     setTitle(pageTitles[pathname] ?? 'FinanceFlow');
   }, [pathname]);
 
-  if (!isClient || !localStorage.getItem('isAuthenticated')) {
-    return null; // Or a loading spinner
+  // Render nothing until we know the auth status to avoid flashes of wrong content
+  if (isAuthenticated === null) {
+    return null;
   }
 
-  return (
-    <SidebarProvider>
-      <div className="flex min-h-screen">
-        <Sidebar collapsible="icon" className="border-r">
-          <MainNav />
-        </Sidebar>
-        <SidebarInset className="flex-1 flex flex-col bg-background">
-          <SiteHeader isMobile={isMobile} title={title} />
-          <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
-            {children}
-          </main>
-        </SidebarInset>
-      </div>
-    </SidebarProvider>
-  );
+  // If on an unprotected route, just render the children (e.g., the login page)
+  if (unprotectedRoutes.includes(pathname)) {
+    return <>{children}</>;
+  }
+
+  // If authenticated and on a protected route, render the full app shell
+  if (isAuthenticated) {
+    return (
+      <SidebarProvider>
+        <div className="flex min-h-screen">
+          <Sidebar collapsible="icon" className="border-r">
+            <MainNav />
+          </Sidebar>
+          <SidebarInset className="flex-1 flex flex-col bg-background">
+            <SiteHeader isMobile={isMobile} title={title} />
+            <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-auto">
+              {children}
+            </main>
+          </SidebarInset>
+        </div>
+      </SidebarProvider>
+    );
+  }
+
+  // This case should ideally not be reached due to the redirect, but it's good practice
+  return null;
 }
