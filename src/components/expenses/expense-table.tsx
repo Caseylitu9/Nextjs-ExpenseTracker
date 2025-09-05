@@ -32,7 +32,7 @@ const categoryColors: { [key: string]: string } = {
     Other: 'bg-indigo-100 text-indigo-800',
 }
 
-export function ExpenseTable({ expenses }: { expenses: Expense[] }) {
+export function ExpenseTable({ expenses = [] }: { expenses: Expense[] }) {
   return (
     <Table>
       <TableHeader>
