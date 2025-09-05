@@ -20,7 +20,7 @@ export default function LoginPage() {
     const password = formData.get('password') as string;
 
     // In a real app, you'd call an API. Here, we'll simulate.
-    if (email === 'user@example.com' && password === 'password') {
+    if (email === 'max@gmail.com' && password === 'password') {
       localStorage.setItem('isAuthenticated', 'true');
       router.push('/dashboard');
     } else {
@@ -41,11 +41,11 @@ export default function LoginPage() {
           <CardContent className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
-              <Input id="email" name="email" type="email" placeholder="m@example.com" required />
+              <Input id="email" name="email" type="email" placeholder="m@example.com" required defaultValue="max@gmail.com" />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" name="password" type="password" required />
+              <Input id="password" name="password" type="password" required defaultValue="password" />
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
           </CardContent>
