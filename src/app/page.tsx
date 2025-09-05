@@ -6,8 +6,8 @@ import { CategoryPieChart } from "@/components/charts/category-pie-chart";
 
 export default function DashboardPage() {
   return (
-    <div className="flex-1 space-y-4 p-4">
-      <div className="space-y-2 bg-teal-200 p-4 rounded-lg">
+    <div className="flex-1 space-y-4 p-4 bg-green-200">
+      <div className="space-y-2 p-4 rounded-lg">
         <h1 className="text-3xl font-headline font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">Here's a snapshot of your financial health.</p>
       </div>
