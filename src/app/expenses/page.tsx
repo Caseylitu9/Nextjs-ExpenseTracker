@@ -1,26 +1,35 @@
 
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExpenseTable, Expense } from "@/components/expenses/expense-table";
 import { AddExpenseDialog } from "@/components/expenses/add-expense-dialog";
 
-const mockExpenses: Expense[] = [
-    { id: '1', description: 'Trader Joe\'s Haul', category: 'Groceries', date: '2024-05-15', amount: 16192.80 },
-    { id: '2', description: 'Monthly Subway Pass', category: 'Transport', date: '2024-05-01', amount: 16510.00 },
-    { id: '3', description: 'Electric Bill', category: 'Utilities', date: '2024-05-10', amount: 11557.00 },
-    { id: '4', description: 'Movie Night', category: 'Entertainment', date: '2024-05-12', amount: 5850.00 },
-    { id: '5', description: 'Rent May', category: 'Housing', date: '2024-05-01', amount: 195000.00 },
-];
-
 export default function ExpensesPage() {
-    const [expenses, setExpenses] = useState<Expense[]>(mockExpenses);
+    const [expenses, setExpenses] = useState<Expense[]>([]);
 
-    const addExpense = (newExpense: Omit<Expense, 'id'>) => {
-        setExpenses(prev => [...prev, { ...newExpense, id: (prev.length + 1).toString() }]);
+    const fetchExpenses = async () => {
+        const response = await fetch('/api/expenses');
+        const data = await response.json();
+        setExpenses(data);
+    };
+
+    useEffect(() => {
+        fetchExpenses();
+    }, []);
+
+    const addExpense = async (newExpense: Omit<Expense, 'id'>) => {
+        await fetch('/api/expenses', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newExpense),
+        });
+        fetchExpenses(); // Refetch expenses after adding
     };
 
     return (

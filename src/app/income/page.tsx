@@ -1,25 +1,35 @@
 
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { IncomeTable, Income } from "@/components/income/income-table";
 import { AddIncomeDialog } from "@/components/income/add-income-dialog";
 
-const mockIncome: Income[] = [
-    { id: '1', source: 'Salary', date: '2024-05-01', amount: 455000.00 },
-    { id: '2', source: 'Freelance Project', date: '2024-05-10', amount: 97565.00 },
-    { id: '3', source: 'Stock Dividend', date: '2024-05-15', amount: 16347.50 },
-    { id: '4', source: 'Etsy Sales', date: '2024-05-20', amount: 41600.00 },
-];
-
 export default function IncomePage() {
-    const [income, setIncome] = useState<Income[]>(mockIncome);
+    const [income, setIncome] = useState<Income[]>([]);
 
-    const addIncome = (newIncome: Omit<Income, 'id'>) => {
-        setIncome(prev => [...prev, { ...newIncome, id: (prev.length + 1).toString() }]);
+    const fetchIncome = async () => {
+        const response = await fetch('/api/income');
+        const data = await response.json();
+        setIncome(data);
+    };
+
+    useEffect(() => {
+        fetchIncome();
+    }, []);
+
+    const addIncome = async (newIncome: Omit<Income, 'id'>) => {
+        await fetch('/api/income', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newIncome),
+        });
+        fetchIncome(); // Refetch income after adding
     };
 
     return (
