@@ -9,11 +9,11 @@ import {
 import { Badge } from "@/components/ui/badge"
 
 const transactions = [
-    { type: 'Income', category: 'Salary', date: '2023-10-01', amount: 3000.00 },
-    { type: 'Expense', category: 'Groceries', date: '2023-10-02', amount: -75.50 },
-    { type: 'Expense', category: 'Utilities', date: '2023-10-03', amount: -120.00 },
-    { type: 'Expense', category: 'Transport', date: '2023-10-04', amount: -42.30 },
-    { type: 'Income', category: 'Freelance', date: '2023-10-05', amount: 450.00 },
+    { type: 'Income', category: 'Salary', date: '2023-10-01', amount: 390000.00 },
+    { type: 'Expense', category: 'Groceries', date: '2023-10-02', amount: -9815.00 },
+    { type: 'Expense', category: 'Utilities', date: '2023-10-03', amount: -15600.00 },
+    { type: 'Expense', category: 'Transport', date: '2023-10-04', amount: -5499.00 },
+    { type: 'Income', category: 'Freelance', date: '2023-10-05', amount: 58500.00 },
 ];
 
 export function RecentTransactions() {
@@ -39,7 +39,7 @@ export function RecentTransactions() {
             <TableCell>{transaction.category}</TableCell>
             <TableCell>{transaction.date}</TableCell>
             <TableCell className={`text-right font-medium ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
-              {transaction.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+              {transaction.amount.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </TableCell>
           </TableRow>
         ))}

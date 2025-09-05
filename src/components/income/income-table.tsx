@@ -15,10 +15,10 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
 const mockIncome = [
-    { id: '1', source: 'Salary', date: '2024-05-01', amount: 3500.00 },
-    { id: '2', source: 'Freelance Project', date: '2024-05-10', amount: 750.50 },
-    { id: '3', source: 'Stock Dividend', date: '2024-05-15', amount: 125.75 },
-    { id: '4', source: 'Etsy Sales', date: '2024-05-20', amount: 320.00 },
+    { id: '1', source: 'Salary', date: '2024-05-01', amount: 455000.00 },
+    { id: '2', source: 'Freelance Project', date: '2024-05-10', amount: 97565.00 },
+    { id: '3', source: 'Stock Dividend', date: '2024-05-15', amount: 16347.50 },
+    { id: '4', source: 'Etsy Sales', date: '2024-05-20', amount: 41600.00 },
 ];
 
 export function IncomeTable() {
@@ -38,7 +38,7 @@ export function IncomeTable() {
             <TableCell className="font-medium">{income.source}</TableCell>
             <TableCell>{income.date}</TableCell>
             <TableCell className="text-right">
-                {income.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                {income.amount.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </TableCell>
              <TableCell className="text-right">
               <DropdownMenu>

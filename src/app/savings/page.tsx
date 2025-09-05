@@ -4,10 +4,10 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
 const savingsGoals = [
-    { name: 'New Car Fund', target: 20000, current: 15000, deadline: 'Dec 2024' },
-    { name: 'Vacation to Japan', target: 8000, current: 3200, deadline: 'Jun 2025' },
-    { name: 'Emergency Fund', target: 10000, current: 10000, deadline: 'Ongoing' },
-    { name: 'New Laptop', target: 1800, current: 900, deadline: 'Sep 2024' },
+    { name: 'New Car Fund', target: 2600000, current: 1950000, deadline: 'Dec 2024' },
+    { name: 'Vacation to Japan', target: 1040000, current: 416000, deadline: 'Jun 2025' },
+    { name: 'Emergency Fund', target: 1300000, current: 1300000, deadline: 'Ongoing' },
+    { name: 'New Laptop', target: 234000, current: 117000, deadline: 'Sep 2024' },
 ];
 
 export default function SavingsPage() {
@@ -35,8 +35,8 @@ export default function SavingsPage() {
                             <CardContent className="space-y-2">
                                 <Progress value={progress} />
                                 <div className="flex justify-between text-sm text-muted-foreground">
-                                    <span>{goal.current.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
-                                    <span>{goal.target.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</span>
+                                    <span>{goal.current.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}</span>
+                                    <span>{goal.target.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}</span>
                                 </div>
                             </CardContent>
                             <CardFooter>

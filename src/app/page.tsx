@@ -20,7 +20,7 @@ export default function DashboardPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$4,231.89</div>
+            <div className="text-2xl font-bold">KSH 550,145.70</div>
             <p className="text-xs text-muted-foreground">
               +20.1% from last month
             </p>
@@ -34,7 +34,7 @@ export default function DashboardPage() {
             <Receipt className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$1,894.50</div>
+            <div className="text-2xl font-bold">KSH 246,285.00</div>
             <p className="text-xs text-muted-foreground">
               +12.4% from last month
             </p>
@@ -46,7 +46,7 @@ export default function DashboardPage() {
             <Wallet className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$2,337.39</div>
+            <div className="text-2xl font-bold">KSH 303,860.70</div>
             <p className="text-xs text-muted-foreground">
               Your current available balance
             </p>

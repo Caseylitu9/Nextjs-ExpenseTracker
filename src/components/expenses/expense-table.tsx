@@ -15,11 +15,11 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
 const mockExpenses = [
-    { id: '1', description: 'Trader Joe\'s Haul', category: 'Groceries', date: '2024-05-15', amount: 124.56 },
-    { id: '2', description: 'Monthly Subway Pass', category: 'Transport', date: '2024-05-01', amount: 127.00 },
-    { id: '3', description: 'Electric Bill', category: 'Utilities', date: '2024-05-10', amount: 88.90 },
-    { id: '4', description: 'Movie Night', category: 'Entertainment', date: '2024-05-12', amount: 45.00 },
-    { id: '5', description: 'Rent May', category: 'Housing', date: '2024-05-01', amount: 1500.00 },
+    { id: '1', description: 'Trader Joe\'s Haul', category: 'Groceries', date: '2024-05-15', amount: 16192.80 },
+    { id: '2', description: 'Monthly Subway Pass', category: 'Transport', date: '2024-05-01', amount: 16510.00 },
+    { id: '3', description: 'Electric Bill', category: 'Utilities', date: '2024-05-10', amount: 11557.00 },
+    { id: '4', description: 'Movie Night', category: 'Entertainment', date: '2024-05-12', amount: 5850.00 },
+    { id: '5', description: 'Rent May', category: 'Housing', date: '2024-05-01', amount: 195000.00 },
 ];
 
 const categoryColors: { [key: string]: string } = {
@@ -53,7 +53,7 @@ export function ExpenseTable() {
             </TableCell>
             <TableCell>{expense.date}</TableCell>
             <TableCell className="text-right">
-                {expense.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                {expense.amount.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </TableCell>
              <TableCell className="text-right">
               <DropdownMenu>

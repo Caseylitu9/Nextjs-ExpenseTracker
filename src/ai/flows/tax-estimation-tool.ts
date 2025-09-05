@@ -16,11 +16,11 @@ import {z} from 'genkit';
 const TaxEstimationInputSchema = z.object({
   income: z
     .number()
-    .describe('The total income for the year in USD. Must be a positive number.'),
+    .describe('The total income for the year in KES. Must be a positive number.'),
   expenses: z
     .number()
     .describe(
-      'The total expenses for the year in USD. Must be a positive number.'
+      'The total expenses for the year in KES. Must be a positive number.'
     ),
 });
 export type TaxEstimationInput = z.infer<typeof TaxEstimationInputSchema>;
@@ -29,7 +29,7 @@ const TaxEstimationOutputSchema = z.object({
   estimatedTaxes: z
     .number()
     .describe(
-      'The estimated taxes owed, in USD.  This is only an estimate and should not be used in place of professional advice.'
+      'The estimated taxes owed, in KES.  This is only an estimate and should not be used in place of professional advice.'
     ),
   disclaimer: z
     .string()
@@ -47,12 +47,12 @@ const prompt = ai.definePrompt({
   name: 'taxEstimationPrompt',
   input: {schema: TaxEstimationInputSchema},
   output: {schema: TaxEstimationOutputSchema},
-  prompt: `You are an expert tax estimator.  Given the income and expenses provided, estimate the taxes owed.
+  prompt: `You are an expert tax estimator for Kenya. Given the income and expenses provided in KES, estimate the taxes owed in KES.
 
 Income: {{income}}
 Expenses: {{expenses}}
 
-Consider standard deductions and common tax laws to provide an accurate estimate.  The outputted estimatedTaxes field should be a number.
+Consider standard deductions and common tax laws in Kenya to provide an accurate estimate. The outputted estimatedTaxes field should be a number.
 
 Always include the following disclaimer in the disclaimer field: "This is only an estimate and not professional advice. Consult with a qualified tax professional for accurate tax advice."`,
 });

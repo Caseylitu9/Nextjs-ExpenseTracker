@@ -39,11 +39,11 @@ export function TaxEstimatorClient() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="income">Total Annual Income</Label>
-            <Input id="income" name="income" type="number" placeholder="e.g., 80000" required />
+            <Input id="income" name="income" type="number" placeholder="e.g., 10400000" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="expenses">Total Annual Expenses</Label>
-            <Input id="expenses" name="expenses" type="number" placeholder="e.g., 15000" required />
+            <Input id="expenses" name="expenses" type="number" placeholder="e.g., 1950000" required />
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center">
@@ -59,7 +59,7 @@ export function TaxEstimatorClient() {
             <AlertTitle>Your Estimated Tax</AlertTitle>
             <AlertDescription className="space-y-4">
               <p className="text-2xl font-bold text-primary">
-                {state.data.estimatedTaxes.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+                {state.data.estimatedTaxes.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
               </p>
               <p className="text-xs text-muted-foreground italic">
                 {state.data.disclaimer}
