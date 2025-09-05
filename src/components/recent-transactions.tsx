@@ -1,0 +1,49 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { Badge } from "@/components/ui/badge"
+
+const transactions = [
+    { type: 'Income', category: 'Salary', date: '2023-10-01', amount: 3000.00 },
+    { type: 'Expense', category: 'Groceries', date: '2023-10-02', amount: -75.50 },
+    { type: 'Expense', category: 'Utilities', date: '2023-10-03', amount: -120.00 },
+    { type: 'Expense', category: 'Transport', date: '2023-10-04', amount: -42.30 },
+    { type: 'Income', category: 'Freelance', date: '2023-10-05', amount: 450.00 },
+];
+
+export function RecentTransactions() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Type</TableHead>
+          <TableHead>Category</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead className="text-right">Amount</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {transactions.map((transaction, index) => (
+          <TableRow key={index}>
+            <TableCell>
+              <Badge variant={transaction.type === 'Income' ? 'default' : 'secondary'}
+               className={transaction.type === 'Income' ? 'bg-green-500/20 text-green-700 hover:bg-green-500/30' : 'bg-red-500/20 text-red-700 hover:bg-red-500/30'}>
+                {transaction.type}
+              </Badge>
+            </TableCell>
+            <TableCell>{transaction.category}</TableCell>
+            <TableCell>{transaction.date}</TableCell>
+            <TableCell className={`text-right font-medium ${transaction.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
+              {transaction.amount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  )
+}
