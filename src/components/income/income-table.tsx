@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -9,19 +10,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
-const mockIncome = [
-    { id: '1', source: 'Salary', date: '2024-05-01', amount: 455000.00 },
-    { id: '2', source: 'Freelance Project', date: '2024-05-10', amount: 97565.00 },
-    { id: '3', source: 'Stock Dividend', date: '2024-05-15', amount: 16347.50 },
-    { id: '4', source: 'Etsy Sales', date: '2024-05-20', amount: 41600.00 },
-];
+export interface Income {
+    id: string;
+    source: string;
+    date: string;
+    amount: number;
+}
 
-export function IncomeTable() {
+export function IncomeTable({ income }: { income: Income[] }) {
   return (
     <Table>
       <TableHeader>
@@ -33,12 +33,12 @@ export function IncomeTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {mockIncome.map((income) => (
-          <TableRow key={income.id}>
-            <TableCell className="font-medium">{income.source}</TableCell>
-            <TableCell>{income.date}</TableCell>
+        {income.map((item) => (
+          <TableRow key={item.id}>
+            <TableCell className="font-medium">{item.source}</TableCell>
+            <TableCell>{item.date}</TableCell>
             <TableCell className="text-right">
-                {income.amount.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
+                {item.amount.toLocaleString('en-KE', { style: 'currency', currency: 'KES' })}
             </TableCell>
              <TableCell className="text-right">
               <DropdownMenu>

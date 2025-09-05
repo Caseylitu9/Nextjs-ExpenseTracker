@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -14,23 +15,24 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
-const mockExpenses = [
-    { id: '1', description: 'Trader Joe\'s Haul', category: 'Groceries', date: '2024-05-15', amount: 16192.80 },
-    { id: '2', description: 'Monthly Subway Pass', category: 'Transport', date: '2024-05-01', amount: 16510.00 },
-    { id: '3', description: 'Electric Bill', category: 'Utilities', date: '2024-05-10', amount: 11557.00 },
-    { id: '4', description: 'Movie Night', category: 'Entertainment', date: '2024-05-12', amount: 5850.00 },
-    { id: '5', description: 'Rent May', category: 'Housing', date: '2024-05-01', amount: 195000.00 },
-];
+export interface Expense {
+    id: string;
+    description: string;
+    category: string;
+    date: string;
+    amount: number;
+}
 
 const categoryColors: { [key: string]: string } = {
     Groceries: 'bg-blue-100 text-blue-800',
     Transport: 'bg-yellow-100 text-yellow-800',
     Utilities: 'bg-purple-100 text-purple-800',
     Entertainment: 'bg-pink-100 text-pink-800',
-    Housing: 'bg-gray-200 text-gray-800'
+    Housing: 'bg-gray-200 text-gray-800',
+    Other: 'bg-indigo-100 text-indigo-800',
 }
 
-export function ExpenseTable() {
+export function ExpenseTable({ expenses }: { expenses: Expense[] }) {
   return (
     <Table>
       <TableHeader>
@@ -43,7 +45,7 @@ export function ExpenseTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {mockExpenses.map((expense) => (
+        {expenses.map((expense) => (
           <TableRow key={expense.id}>
             <TableCell className="font-medium">{expense.description}</TableCell>
             <TableCell>
