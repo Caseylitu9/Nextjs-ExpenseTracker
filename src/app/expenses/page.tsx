@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ExpenseTable, Expense } from "@/components/expenses/expense-table";
 import { AddExpenseDialog } from "@/components/expenses/add-expense-dialog";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ExpensesPage() {
     const [expenses, setExpenses] = useState<Expense[]>([]);
+    const { toast } = useToast();
 
     const fetchExpenses = async () => {
         const response = await fetch('/api/expenses');
@@ -22,14 +24,27 @@ export default function ExpensesPage() {
     }, []);
 
     const addExpense = async (newExpense: Omit<Expense, 'id'>) => {
-        await fetch('/api/expenses', {
+        const response = await fetch('/api/expenses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(newExpense),
         });
-        fetchExpenses(); // Refetch expenses after adding
+
+        if (response.ok) {
+            toast({
+                title: "Expense Added",
+                description: "Your new expense has been saved successfully.",
+            });
+            fetchExpenses(); // Refetch expenses after adding
+        } else {
+             toast({
+                title: "Error",
+                description: "There was a problem saving your expense.",
+                variant: "destructive",
+            });
+        }
     };
 
     return (

@@ -7,9 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { IncomeTable, Income } from "@/components/income/income-table";
 import { AddIncomeDialog } from "@/components/income/add-income-dialog";
+import { useToast } from "@/hooks/use-toast";
 
 export default function IncomePage() {
     const [income, setIncome] = useState<Income[]>([]);
+    const { toast } = useToast();
 
     const fetchIncome = async () => {
         const response = await fetch('/api/income');
@@ -22,14 +24,27 @@ export default function IncomePage() {
     }, []);
 
     const addIncome = async (newIncome: Omit<Income, 'id'>) => {
-        await fetch('/api/income', {
+       const response = await fetch('/api/income', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(newIncome),
         });
-        fetchIncome(); // Refetch income after adding
+
+        if (response.ok) {
+            toast({
+                title: "Income Added",
+                description: "Your new income has been saved successfully.",
+            });
+            fetchIncome(); // Refetch income after adding
+        } else {
+            toast({
+                title: "Error",
+                description: "There was a problem saving your income.",
+                variant: "destructive",
+            });
+        }
     };
 
     return (
