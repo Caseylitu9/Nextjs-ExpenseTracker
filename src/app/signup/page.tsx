@@ -8,10 +8,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
+import { Eye, EyeOff } from 'lucide-react';
 
 export default function SignupPage() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,9 +42,19 @@ export default function SignupPage() {
               <Label htmlFor="email">Email</Label>
               <Input id="email" type="email" placeholder="m@example.com" required />
             </div>
-            <div className="grid gap-2">
+            <div className="grid gap-2 relative">
               <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" required />
+              <Input id="password" type={showPassword ? 'text' : 'password'} required />
+               <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="absolute right-1 top-7 h-7 w-7"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                <span className="sr-only">{showPassword ? 'Hide password' : 'Show password'}</span>
+              </Button>
             </div>
              {error && <p className="text-sm text-red-500">{error}</p>}
           </CardContent>
